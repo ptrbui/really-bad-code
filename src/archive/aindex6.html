@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Website</title>
+  <style>
+    body, h1, h2, h3, h4, h5, h6, p, a {
+      font-family: Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 800px;
+      height: 600px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: hidden; /* Remove overflow-y and overflow-x */
+      border-radius: 5px; /* Add rounded corners */
+      position: relative; /* Position the container */
+      display: flex; /* Use flexbox */
+      z-index: 2; /* Ensure the container is above the video */
+    }
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1; /* Place the video behind other elements */
+    }
+    .sidebar {
+      background-color: #f0f0f0;
+      padding: 20px;
+      width: 150px; /* Adjust the width to make the sidebar skinnier */
+      position: absolute; /* Change position to absolute */
+      top: 0; /* Fix the sidebar to the top */
+      bottom: 0; /* Fix the sidebar to the bottom */
+      left: 0; /* Fix the sidebar to the left */
+      overflow-y: auto; /* Add vertical scroll if needed */
+    }
+    .sidebar a {
+      display: block;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 20px; /* Adjust the font size of sidebar links */
+      padding: 10px; /* Add padding to create space around the text */
+      border-radius: 5px; /* Add border radius for rounded corners */
+      position: relative;
+    }
+    .sidebar a .tab-icon {
+      display: none;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .sidebar a:hover {
+      color: #ff5d00;
+    }
+    .sidebar a.active {
+      background-color: white;
+      color: #333;
+    }
+    .sidebar a.active .tab-icon {
+      display: block;
+    }
+    .main-content {
+      padding: 20px;
+      margin-left: 200px; /* Sidebar width + padding */
+      height: 100%; /* Set main-content height to match the sidebar */
+      overflow-y: auto; /* Add vertical scroll if needed */
+      border-top-left-radius: 5px; /* Add border radius for the top left corner */
+    }
+    #about {
+      text-align: center; /* Center the content */
+    }
+    .profile-picture {
+      width: 80px; /* Adjust the width to make the profile picture smaller */
+      height: 80px; /* Adjust the height accordingly */
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 10px auto; /* Center the profile picture horizontally and add equal top and bottom margins */
+    }
+    #about h2 {
+      margin-top: 0px; /* Add margin to the top of the heading */
+    }
+    #about p {
+      text-align: left; /* Align paragraphs to the left */
+      margin-bottom: 20px; /* Add margin to the bottom of the paragraphs */
+    }
+    .resume-section ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .resume-section li {
+      margin-bottom: 10px;
+    }
+    /* Larger font size for section headers */
+    h2 {
+      font-size: 32px;
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+    .active-indicator {
+      display: none; /* Initially hide the active indicator */
+      position: absolute;
+      background-color: white;
+      width: 150px; /* Width of the sidebar */
+      height: 40px; /* Adjust as needed */
+      border-radius: 5px;
+      z-index: -1; /* Behind other content */
+    }
+    .active-indicator .tab-icon {
+      display: block;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    #about p:last-child {
+      margin-bottom: 100px; /* Add space to the bottom of the last paragraph */
+    }
+    .links-container {
+      position: absolute;
+      top: 50%;
+      left: calc(50% + 100px); /* Adjusted to center between sidebar and main interface */
+      transform: translateY(-50%);
+      display: none;
+    }
+    .links-container.active {
+      display: block;
+    }
+    .links-container a {
+      display: block;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<video class="background-video" autoplay loop muted>
+  <source src="images/background.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<div class="container">
+
+  <div class="sidebar">
+    <a href="#about" class="active">About<span class="tab-icon"><img src="images/circle.png" alt="Circle Icon" width="14" height="14"></span></a>
+    <a href="#resume">Resume<span class="tab-icon"><img src="images/circle.png" alt="Circle Icon" width="14" height="14"></span></a>
+    <a href="#links">Links<span class="tab-icon"><img src="images/circle.png" alt="Circle Icon" width="14" height="14"></span></a>
+    <div class="active-indicator"></div> <!-- Active indicator -->
+  </div>
+
+  <div class="main-content">
+
+    <div id="about">
+      <h2>About</h2>
+      <img class="profile-picture" src="images/pfp.png" alt="Your Profile Picture">
+      <p>Your first paragraph goes here. Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Sed ut urna nec dui vehicula malesuada. Sed ut urna nec dui vehicula malesuada.
+        Sed ut urna nec dui vehicula malesuada. Sed ut urna nec dui vehicula malesuada. Sed ut urna nec dui vehicula malesuada.
+        Proin a urna consequat, consequat orci nec, hendrerit turpis. Curabitur et suscipit elit, eget volutpat orci.
+        Integer finibus, nisi nec malesuada suscipit, elit quam accumsan turpis, vitae sollicitudin mi tortor et eros. Nulla
+        facilisi. Aliquam nec diam at sapien vehicula commodo.Nulla facilisi. Aliquam nec diam at sapien vehicula commodo.
+        Nulla facilisi. Aliquam nec diam at sapien vehicula commodo. Nulla facilisi. Aliquam nec diam at sapien vehicula
+        commodo. Nulla facilisi. Aliquam nec diam at sapien vehicula commodo. Nulla facilisi. Aliquam nec diam at sapien
+        vehicula commodo. Nulla facilisi. Aliquam nec diam at sapien vehicula commodo. Nulla facilisi. Aliquam nec diam
+        at sapien vehicula commodo.
+      </p>
+      <p>
+        Your second paragraph goes here. Duis vulputate, lectus at commodo viverra, arcu mi feugiat libero, eget laoreet
+        sem diam vel libero. Curabitur feugiat lacinia dui, et iaculis eros finibus a. Integer gravida odio vitae nunc dignissim,
+        nec tincidunt lectus convallis. In feugiat hendrerit ligula, nec efficitur velit. Cras et neque elit.
+        Duis elementum sodales libero, vitae vestibulum arcu interdum vel. Proin consectetur sodales justo, nec ultrices
+        urna vulputate et. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse
+        eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet
+        auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse
+        eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet
+        auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor. Suspendisse
+        eu dolor et nulla laoreet auctor. Suspendisse eu dolor et nulla laoreet auctor.
+      </p>
+    </div>
+
+    <div id="resume" style="display: none;">
+      <h2>Resume</h2>
+      <p>Your resume information goes here.</p>
+    </div>
+
+    <div id="links" style="display: none;"> <!-- Hide the links section initially -->
+      <h2>Links</h2>
+      <div class="links-container" id="links-container">
+        <a href="https://www.linkedin.com/in/your-linkedin-profile/" target="_blank"><img src="images/linkedin.png" alt="LinkedIn Icon" width="30" height="30"></a>
+        <a href="https://github.com/your-github-profile" target="_blank"><img src="images/github.png" alt="GitHub Icon" width="30" height="30"></a>
+        <a href="https://leetcode.com/your-leetcode-profile" target="_blank"><img src="images/leetcode.png" alt="LeetCode Icon" width="30" height="30"></a>
+        <a href="https://your-substack-profile.substack.com/" target="_blank"><img src="images/substack.png" alt="Substack Icon" width="30" height="30"></a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const contentSections = document.querySelectorAll('.main-content div');
+    const activeIndicator = document.querySelector('.active-indicator');
+    const linksContainer = document.getElementById('links-container');
+
+    const defaultSection = document.querySelector('.main-content div:first-child');
+    const defaultLink = document.querySelector('.sidebar a[href="#about"]');
+
+    // Initially show the default section
+    defaultSection.style.display = 'block';
+    defaultLink.classList.add('active');
+
+    // Position the active indicator for the default section
+    activeIndicator.style.display = 'block';
+    activeIndicator.style.top = `${defaultLink.offsetTop}px`;
+    const icon = defaultLink.querySelector('.tab-icon');
+    if (icon) {
+      activeIndicator.innerHTML = icon.outerHTML;
+    } else {
+      activeIndicator.innerHTML = '';
+    }
+
+    // Add event listeners to sidebar links
+    sidebarLinks.forEach((link, index) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        contentSections.forEach(section => {
+          section.style.display = 'none';
+        });
+        contentSections[index].style.display = 'block';
+
+        // Remove the active class from all sidebar links
+        sidebarLinks.forEach(sidebarLink => {
+          sidebarLink.classList.remove('active');
+        });
+
+        // Add the active class to the clicked link
+        link.classList.add('active');
+
+        // Position the active indicator
+        activeIndicator.style.display = 'block';
+        activeIndicator.style.top = `${link.offsetTop}px`;
+        const icon = link.querySelector('.tab-icon');
+        if (icon) {
+          activeIndicator.innerHTML = icon.outerHTML;
+        } else {
+          activeIndicator.innerHTML = '';
+        }
+
+        // Show links container only when "Links" tab is active
+        if (link.getAttribute('href') === '#links') {
+          linksContainer.style.display = 'block'; // Corrected
+        } else {
+          linksContainer.style.display = 'none'; // Corrected
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
